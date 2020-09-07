@@ -9,13 +9,17 @@ const myPeer = new Peer(undefined, {
 
 const myVideo = document.createElement("video");
 myVideo.muted = true; // to mute our video's sound on our side
+
 const peers = {};
+let myVideoStream;
+
 navigator.mediaDevices
   .getUserMedia({
     video: true,
     audio: true,
   })
   .then((stream) => {
+    myVideoStream = stream;
     addVideoStream(myVideo, stream);
 
     //when someone calls, send them our stream
@@ -85,4 +89,50 @@ socket.on("createMessage", (message) => {
 const scrollToBottom = () => {
   let d = $(".main__chat_window");
   d.scrollTop(d.prop("scrollHeight"));
+};
+
+const muteUnmute = () => {
+  const enabled = myVideoStream.getAudioTracks()[0].enabled;
+  if (enabled) {
+    myVideoStream.getAudioTracks()[0].enabled = false;
+    setUnMuteButton();
+  } else {
+    myVideoStream.getAudioTracks()[0].enabled = true;
+    setMuteButton();
+  }
+};
+
+const setMuteButton = () => {
+  const html = ` <i class="fas fa-microphone"></i>
+    <span>Mute</span>`;
+  document.querySelector(".main__mute_button").innerHTML = html;
+};
+
+const setUnMuteButton = () => {
+  const html = ` <i class="disabled fas fa-microphone-slash"></i>
+      <span>UnMute</span>`;
+  document.querySelector(".main__mute_button").innerHTML = html;
+};
+
+const playStop = () => {
+  let enabled = myVideoStream.getVideoTracks()[0].enabled;
+  if (enabled) {
+    myVideoStream.getVideoTracks()[0].enabled = false;
+    setStopButton();
+  } else {
+    myVideoStream.getVideoTracks()[0].enabled = true;
+    setPlayButton();
+  }
+};
+
+const setPlayButton = () => {
+  const html = `<i class="fas fa-video"></i>
+    <span> Stop Video </span>`;
+  document.querySelector(".main__video-button").innerHTML = html;
+};
+
+const setStopButton = () => {
+  const html = `<i class="disabled fas fa-video-slash"></i>
+      <span> Play Video </span>`;
+  document.querySelector(".main__video-button").innerHTML = html;
 };

@@ -107,3 +107,7 @@ video {
   color: white;
   list-style: none;
 }
+
+.disabled {
+  color: #cc3b33;
+}
