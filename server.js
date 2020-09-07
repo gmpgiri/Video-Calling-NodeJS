@@ -24,6 +24,11 @@ io.on("connection", (socket) => {
     //and send message to everyone else in the room that a new user of userId has joined the room
     socket.to(roomId).broadcast.emit("user-connected", userId);
 
+    //getting the message from the user and sending it to the room
+    socket.on("message", (message) => {
+      io.to(roomId).emit("createMessage", message);
+    });
+
     socket.on("disconnect", () => {
       socket.to(roomId).broadcast.emit("user-disconnected", userId);
     });

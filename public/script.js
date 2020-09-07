@@ -64,3 +64,25 @@ const addVideoStream = (video, stream) => {
   });
   videoGrid.append(video);
 };
+
+let text = $("input");
+
+$("html").keydown((e) => {
+  //13 --> on pressing enter ket
+  if (e.which == 13 && text.val().length !== 0) {
+    //send message to server
+    socket.emit("message", text.val());
+    text.val("");
+  }
+});
+
+socket.on("createMessage", (message) => {
+  $(".messages").append(`<li class="message">${message}</li>`);
+  scrollToBottom();
+});
+
+// always scrolls to bottom when there is a new message is added
+const scrollToBottom = () => {
+  let d = $(".main__chat_window");
+  d.scrollTop(d.prop("scrollHeight"));
+};
