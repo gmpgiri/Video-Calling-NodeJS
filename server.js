@@ -23,6 +23,10 @@ io.on("connection", (socket) => {
     socket.join(roomId);
     //and send message to everyone else in the room that a new user of userId has joined the room
     socket.to(roomId).broadcast.emit("user-connected", userId);
+
+    socket.on("disconnect", () => {
+      socket.to(roomId).broadcast.emit("user-disconnected", userId);
+    });
   });
 });
 
