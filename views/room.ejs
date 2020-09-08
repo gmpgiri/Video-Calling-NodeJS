@@ -29,6 +29,12 @@
           <div id="video-grid"></div>
         </div>
         <div class="main__controls">
+          <div class="main__controls__block">
+            <div onclick="copyRoomLink()" class="main__controls__button main__mute_button">
+              <i class="fas fa-clipboard"></i>             
+              <span>Copy Room Link</span>
+          </div>
+          </div>
             <div class="main__controls__block">
                 <div onclick="muteUnmute()" class="main__controls__button main__mute_button">
                     <i class="fas fa-microphone"></i>
@@ -40,24 +46,11 @@
                 </div>
             </div>  
             <div class="main__controls__block">
-                <div class="main__controls__button">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Security</span>
-                </div>
-                <div class="main__controls__button">
-                    <i class="fas fa-user-friends"></i>
-                    <span> Participants</pan>
-                </div>
-                <div class="main__controls__button">
-                    <i class="fas fa-comment-alt"></i>
-                    <span> Chat</pan>
-                </div>
-            </div>
-            <div class="main__controls__block">
-                <div class="main__controls__button">
+                <div onclick="open(location, '_self').close()" class="main__controls__button">
                     <span class="leave__meeting">Leave Meeting</span>
                 </div>
-            </div>    
+            </div>
+                
         </div>
       </div>
       <div class="main__right">

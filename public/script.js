@@ -91,6 +91,18 @@ const scrollToBottom = () => {
   d.scrollTop(d.prop("scrollHeight"));
 };
 
+//it is possible to copy the current url by adding a dummy text field and using it to copy url
+const copyRoomLink = () => {
+  let dummy = document.createElement("input"); //creating a dummy text field
+  let text = window.location.href; //variable with current url
+
+  document.body.appendChild(dummy); //appending the text field to body element ( it wont be visible to user)
+  dummy.value = text; //assiging the current url values to the dummy text field
+  dummy.select(); //select function is used to select the contents of the text field
+  document.execCommand("copy"); //copy the selected contents to clipbord
+  document.body.removeChild(dummy);
+};
+
 const muteUnmute = () => {
   const enabled = myVideoStream.getAudioTracks()[0].enabled;
   if (enabled) {
