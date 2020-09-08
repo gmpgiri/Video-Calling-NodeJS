@@ -3,8 +3,9 @@ const videoGrid = document.getElementById("video-grid");
 //create a peer connection on port 3001
 //undefined is given as id, so that Peerjs will create its own unique id
 const myPeer = new Peer(undefined, {
+  path: "/peerjs",
   host: "/",
-  port: "3001",
+  port: "443",
 });
 
 const myVideo = document.createElement("video");
